@@ -1,1 +1,39 @@
+import random 
+import os
 
+questions = [
+    {
+        'question': 'What is the capital of France?',
+        'correct_answer': 'Paris',
+        'wrong_answers': ['London', 'Berlin', 'Madrid']
+    },
+    {
+        'question': 'Who is the author of "The Catcher in the Rye"?',
+        'correct_answer': 'J.D. Salinger',
+        'wrong_answers': ['F. Scott Fitzgerald', 'William Faulkner', 'Mark Twain']
+    },
+    # Add more questions as needed
+]
+def ask_question(question):
+    print(question['question'])
+    print('A)', question['correct_answer'])
+    for i, wrong_answer in enumerate(question['wrong_answers']):
+        print(f"{chr(65 + i + 1)}) {wrong_answer}")
+
+    user_answer = input('Enter your answer: ').upper()
+    return user_answer == question['correct_answer']
+
+def main():
+    random.shuffle(questions)
+    score = 0
+
+    for question in questions:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        if ask_question(question):
+            score += 1
+
+    print(f"Your final score is {score}/{len(questions)}")
+
+if __name__ == "__main__":
+    main()
+    
